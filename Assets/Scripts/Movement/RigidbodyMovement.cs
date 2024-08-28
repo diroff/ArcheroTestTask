@@ -16,6 +16,6 @@ public class RigidbodyMovement : Movement
 
     protected void ApplyMovement(Vector3 position)
     {
-        Rigidbody.MovePosition(position);
+        Rigidbody.velocity = position * Speed;
     }
 }
