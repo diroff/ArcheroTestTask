@@ -24,4 +24,10 @@ public class Enemy : Fighter
     {
         return BaseDamage;
     }
+
+    protected override void Die()
+    {
+        base.Die();
+        Destroy(gameObject);
+    }
 }

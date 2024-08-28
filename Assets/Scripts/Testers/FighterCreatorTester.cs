@@ -12,22 +12,29 @@ public class FighterCreatorTester : MonoBehaviour
     [SerializeField] private Transform _playerSpawnPoint;
     [SerializeField] private Transform _enemySpawnPoint;
 
-    private Queue<Enemy> _createdEnemies = new Queue<Enemy>();
+    private List<Enemy> _createdEnemies = new List<Enemy>();
 
-    public void CreatePlayer()
+    private Player _player;
+
+    private void Start()
     {
-        var player = Instantiate(_playerPrefab, _playerSpawnPoint.position, Quaternion.identity);
-
-        player.SetData(_playerData);
+        CreatePlayer();
     }
 
-    public void CreateEnemy()
+    private void CreatePlayer()
+    {
+        _player = Instantiate(_playerPrefab, _playerSpawnPoint.position, Quaternion.identity);
+
+        _player.SetData(_playerData);
+    }
+
+    private void CreateEnemy()
     {
         var enemyNumber = Random.Range(0, _enemyDatas.Count);
 
         var enemy = Instantiate(_enemyPrefab, _enemySpawnPoint.position, Quaternion.identity);
         enemy.SetData(_enemyDatas[enemyNumber]);
-        _createdEnemies.Enqueue(enemy);
+        _createdEnemies.Add(enemy);
     }
 
     private void DestroyLastEnemy()
@@ -35,15 +42,29 @@ public class FighterCreatorTester : MonoBehaviour
         if (_createdEnemies.Count == 0)
             return;
 
-        var enemy = _createdEnemies.Dequeue();
+        var enemy = _createdEnemies[_createdEnemies.Count - 1];
+
+        _createdEnemies.RemoveAt(_createdEnemies.Count - 1);
         Destroy(enemy.gameObject);
+    }
+
+    public Player GetPlayer()
+    {
+        return _player;
+    }
+
+    public Enemy GetRandomEnemy()
+    {
+        if (_createdEnemies.Count == 0)
+            return null;
+
+        int enemyNumber = Random.Range(0, _createdEnemies.Count);
+
+        return _createdEnemies[enemyNumber];
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P)) 
-            CreatePlayer();
-
         if (Input.GetKeyDown(KeyCode.E))
             CreateEnemy();
 

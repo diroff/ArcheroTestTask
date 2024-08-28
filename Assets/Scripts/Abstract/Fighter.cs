@@ -29,6 +29,8 @@ public abstract class Fighter : Character, IDamagable, IAttacker
 
     public void Attack(IDamagable target)
     {
+        _currentTarget = target;
+
         _currentTarget?.TakeDamage(CalculateTotalDamage());
     }
 
