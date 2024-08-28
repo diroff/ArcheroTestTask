@@ -3,27 +3,27 @@ using UnityEngine.Events;
 
 public abstract class Character : MonoBehaviour
 {
-    protected CharacterData _data;
+    protected CharacterData Data;
 
-    protected float _currentSpeed;
+    protected float CurrentSpeed;
 
-    private IMovable _movable;
+    private IMovable Movable;
 
     public UnityAction<float> SpeedChanged;
 
     public void SetMovableStrategy(IMovable movable)
     {
-        _movable = movable;
+        Movable = movable;
     }
 
     public void Move(Vector3 direction)
     {
-        _movable?.Move(direction);
+        Movable?.Move(direction);
     }
 
     public void SetData(CharacterData data)
     {
-        _data = data;
+        Data = data;
     }
 
     public void IncreaseSpeed(float value)
@@ -31,8 +31,8 @@ public abstract class Character : MonoBehaviour
         if (value < 0)
             return;
 
-        _currentSpeed += value;
-        SpeedChanged?.Invoke(_currentSpeed);
+        CurrentSpeed += value;
+        SpeedChanged?.Invoke(CurrentSpeed);
     }
 
     public void DecreaseSpeed(float value)
@@ -40,7 +40,7 @@ public abstract class Character : MonoBehaviour
         if (value < 0)
             return;
 
-        _currentSpeed -= value;
-        SpeedChanged?.Invoke(_currentSpeed);
+        CurrentSpeed -= value;
+        SpeedChanged?.Invoke(CurrentSpeed);
     }
 }

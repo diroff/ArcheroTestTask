@@ -13,7 +13,8 @@ public abstract class Fighter : Character, IDamagable, IAttacker
 
     private IDamagable _currentTarget;
 
-    public UnityAction<float, float> HealthChanged; 
+    public UnityAction<float, float> HealthChanged;
+    public UnityAction Died;
 
     public void Attack(IDamagable target)
     {
@@ -30,10 +31,15 @@ public abstract class Fighter : Character, IDamagable, IAttacker
         if(CurrentHealth < 0)
         {
             CurrentHealth = 0;
-
+            Die();
         }
 
         HealthChanged?.Invoke(CurrentHealth, BaseHealth);
+    }
+
+    protected virtual void Die()
+    {
+        Died?.Invoke();
     }
 
     public abstract float CalculateTotalDamage();
