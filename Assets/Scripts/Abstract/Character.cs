@@ -11,6 +11,13 @@ public abstract class Character : MonoBehaviour
 
     public UnityAction<float> SpeedChanged;
 
+    public virtual void SetData(CharacterData data)
+    {
+        Data = data;
+
+        IncreaseSpeed(Data.BaseSpeed);
+    }
+
     public void SetMovableStrategy(IMovable movable)
     {
         Movable = movable;
@@ -19,11 +26,6 @@ public abstract class Character : MonoBehaviour
     public void Move(Vector3 direction)
     {
         Movable?.Move(direction);
-    }
-
-    public void SetData(CharacterData data)
-    {
-        Data = data;
     }
 
     public void IncreaseSpeed(float value)

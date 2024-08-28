@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
 
 public abstract class Fighter : Character, IDamagable, IAttacker
 {
-    protected float BaseHealth;
+    protected float MaxHealth;
 
     protected float CurrentHealth;
     protected float BaseDamage;
@@ -15,6 +12,20 @@ public abstract class Fighter : Character, IDamagable, IAttacker
 
     public UnityAction<float, float> HealthChanged;
     public UnityAction Died;
+
+    public override void SetData(CharacterData data)
+    {
+        base.SetData(data);
+
+        var characterData = data as FighterData;
+
+        MaxHealth = characterData.BaseHealth;
+        SetHealth(MaxHealth);
+        HealthChanged?.Invoke(CurrentHealth, MaxHealth);
+
+        BaseDamage = characterData.BaseAttackDamage;
+        BaseAttackSpeed = characterData.BaseAttackSpeed;
+    }
 
     public void Attack(IDamagable target)
     {
@@ -28,13 +39,19 @@ public abstract class Fighter : Character, IDamagable, IAttacker
 
         CurrentHealth -= value;
 
-        if(CurrentHealth < 0)
+        if (CurrentHealth < 0)
         {
             CurrentHealth = 0;
             Die();
         }
 
-        HealthChanged?.Invoke(CurrentHealth, BaseHealth);
+        HealthChanged?.Invoke(CurrentHealth, MaxHealth);
+    }
+
+    private void SetHealth(float value)
+    {
+        CurrentHealth = value;
+        HealthChanged?.Invoke(CurrentHealth, MaxHealth);
     }
 
     protected virtual void Die()
