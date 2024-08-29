@@ -32,7 +32,9 @@ public class FighterCreatorTester : MonoBehaviour
     {
         var enemyNumber = Random.Range(0, _enemyDatas.Count);
 
-        var enemy = Instantiate(_enemyPrefab, _enemySpawnPoint.position, Quaternion.identity);
+        Vector3 spawnDimention = new Vector3(Random.Range(-3f, 3f), 0, Random.Range(-3f, 3f));
+
+        var enemy = Instantiate(_enemyPrefab, _enemySpawnPoint.position + spawnDimention, Quaternion.identity);
         enemy.SetData(_enemyDatas[enemyNumber]);
         _createdEnemies.Add(enemy);
     }

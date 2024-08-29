@@ -28,7 +28,6 @@ public class RandomWeaponTester : MonoBehaviour
 
         randomWeapon.SetProjectilePrefab(_bulletPrefab);
         _fighter.SetWeapon(randomWeapon);
-        Debug.Log("weapon created!");
     }
 
     private WeaponData GetRandomWeaponData()
