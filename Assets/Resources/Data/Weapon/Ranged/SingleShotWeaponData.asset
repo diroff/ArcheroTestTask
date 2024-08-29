@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20e8109f2781e240a0a1d47732adc67, type: 3}
   m_Name: SingleShotWeaponData
   m_EditorClassIdentifier: 
-  <BaseAttackSpeed>k__BackingField: 0
-  <BaseAttackDamage>k__BackingField: 0
+  <BaseAttackSpeed>k__BackingField: 0.5
+  <BaseAttackDamage>k__BackingField: 5

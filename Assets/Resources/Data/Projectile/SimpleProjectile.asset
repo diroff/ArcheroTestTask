@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a107631475a4fef4aa60719f3df7500a, type: 3}
   m_Name: SimpleProjectile
   m_EditorClassIdentifier: 
-  <BaseDamage>k__BackingField: 0
-  <BaseSpeed>k__BackingField: 0
-  <LifeTime>k__BackingField: 0
+  <BaseDamage>k__BackingField: 5
+  <BaseSpeed>k__BackingField: 3
+  <LifeTime>k__BackingField: 1
