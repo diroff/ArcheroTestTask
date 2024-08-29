@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public abstract class Weapon : IWeapon
 {
     protected float BaseAttackSpeed;
@@ -15,6 +17,8 @@ public abstract class Weapon : IWeapon
         BaseAttackDamage = WeaponData.BaseAttackDamage;
 
         Owner = owner;
+
+        Debug.Log($"Weapon initialized: {Owner}");
     }
 
     public virtual void Attack(IDamagable target) { }

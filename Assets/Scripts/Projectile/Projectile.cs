@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
     [field: SerializeField] public ProjectileData CurrentData { get; protected set; }
 
     [SerializeField] protected Rigidbody Rigidbody;
+    [SerializeField] private Collider _collider;
 
     protected float CurrentSpeed;
     protected float CurrentDamage;
@@ -32,10 +33,12 @@ public class Projectile : MonoBehaviour
         _damageFromWeapon = weapon.CalculateDamage();
 
         _owner = weapon.Owner.gameObject;
+        Debug.Log(_owner);
     }
 
     public void Launch(Vector3 direction)
     {
+        _collider.enabled = true;
         Rigidbody.velocity = direction.normalized * CurrentSpeed;
     }
 
@@ -67,6 +70,7 @@ public class Projectile : MonoBehaviour
 
     private void Deactivate()
     {
+        _collider.enabled = false;
         Destroy(gameObject);
     }
 }
