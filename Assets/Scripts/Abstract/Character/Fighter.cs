@@ -34,6 +34,7 @@ public abstract class Fighter : Character, IDamagable
     private void Update()
     {
         RotateToTarget();
+        Attack();
     }
 
     protected virtual void RotateToTarget()
@@ -51,9 +52,7 @@ public abstract class Fighter : Character, IDamagable
         if (directionToTarget == Vector3.zero)
             return;
 
-        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
-
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        Movable.Rotate(directionToTarget);
     }
 
     public void SetWeapon(IWeapon weapon)
