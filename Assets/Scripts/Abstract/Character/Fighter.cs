@@ -31,6 +31,28 @@ public abstract class Fighter : Character, IDamagable
         BaseAttackSpeed = characterData.BaseAttackDelay;
     }
 
+    private void Update()
+    {
+        RotateToTarget();
+    }
+
+    private void RotateToTarget()
+    {
+        if (!TargetIsActive())
+            return;
+
+        Vector3 directionToTarget = ((MonoBehaviour)CurrentTarget).transform.position - transform.position;
+
+        directionToTarget.y = 0;
+
+        if (directionToTarget == Vector3.zero)
+            return;
+
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+    }
+
     public void SetWeapon(IWeapon weapon)
     {
         CurrentWeapon = weapon;
@@ -43,6 +65,9 @@ public abstract class Fighter : Character, IDamagable
 
     public void Attack()
     {
+        if (!TargetIsActive())
+            return;
+
         CurrentWeapon?.Attack(CurrentTarget);
     }
 
@@ -81,6 +106,16 @@ public abstract class Fighter : Character, IDamagable
     protected virtual void Die()
     {
         Died?.Invoke();
+    }
+
+    protected bool TargetIsActive()
+    {
+        bool targetIsNull = (CurrentTarget == null || ((MonoBehaviour)CurrentTarget) == null);
+
+        if (targetIsNull)
+            CurrentTarget = null;
+
+        return !targetIsNull;
     }
 
     public abstract float CalculateTotalDamage();

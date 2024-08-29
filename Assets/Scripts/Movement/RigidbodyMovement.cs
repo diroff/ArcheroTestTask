@@ -12,7 +12,7 @@ public class RigidbodyMovement : Movement
     public override void Move(Vector3 position)
     {
         ApplyMovement(position);
-        RotateTowards(position);
+        Rotate(position);
     }
 
     protected void ApplyMovement(Vector3 position)
@@ -20,7 +20,7 @@ public class RigidbodyMovement : Movement
         Rigidbody.velocity = position * Speed;
     }
 
-    protected void RotateTowards(Vector3 targetPosition)
+    public override void Rotate(Vector3 targetPosition)
     {
         Vector3 direction = targetPosition.normalized;
 

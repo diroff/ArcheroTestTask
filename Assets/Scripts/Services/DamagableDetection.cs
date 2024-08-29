@@ -11,10 +11,10 @@ public class DamagableDetection : MonoBehaviour
     {
         IDamagable damagable = other.GetComponent<IDamagable>();
 
-        if (damagable == null)
+        if (damagable == null || other.gameObject == _fighter.gameObject)
             return;
 
-        if (other.gameObject == _fighter.gameObject)
+        if (_damagablesInRange.Contains(damagable))
             return;
 
         _damagablesInRange.Add(damagable);
@@ -37,6 +37,8 @@ public class DamagableDetection : MonoBehaviour
 
     private void UpdateTarget()
     {
+        RemoveNullObjectsFromList();
+
         if (_damagablesInRange.Count == 0)
         {
             ClearTarget();
@@ -47,9 +49,9 @@ public class DamagableDetection : MonoBehaviour
         _fighter.SetTarget(closestDamagable);
     }
 
-    private void ClearTarget()
+    private void RemoveNullObjectsFromList()
     {
-        _fighter.SetTarget(null);
+        _damagablesInRange.RemoveAll(damagable => damagable == null || !(damagable is MonoBehaviour));
     }
 
     private IDamagable FindClosestDamagable()
@@ -59,10 +61,16 @@ public class DamagableDetection : MonoBehaviour
 
         foreach (var damagable in _damagablesInRange)
         {
-            float distance = CalculateDistance(damagable);
-
-            if (distance < closestDistance)
+            if (damagable is MonoBehaviour monoBehaviour)
             {
+                if (monoBehaviour == null || monoBehaviour.transform == null)
+                    continue;
+
+                float distance = Vector3.Distance(transform.position, monoBehaviour.transform.position);
+
+                if (distance >= closestDistance)
+                    continue;
+
                 closestDistance = distance;
                 closestDamagable = damagable;
             }
@@ -71,8 +79,8 @@ public class DamagableDetection : MonoBehaviour
         return closestDamagable;
     }
 
-    private float CalculateDistance(IDamagable damagable)
+    private void ClearTarget()
     {
-        return Vector3.Distance(transform.position, ((MonoBehaviour)damagable).transform.position);
+        _fighter.SetTarget(null);
     }
 }

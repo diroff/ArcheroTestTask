@@ -33,7 +33,6 @@ public class Projectile : MonoBehaviour
         _damageFromWeapon = weapon.CalculateDamage();
 
         _owner = weapon.Owner.gameObject;
-        Debug.Log(_owner);
     }
 
     public void Launch(Vector3 direction)

@@ -7,7 +7,7 @@ public abstract class Character : MonoBehaviour
 
     protected float CurrentSpeed;
 
-    private IMovable Movable;
+    protected IMovable Movable;
 
     public UnityAction<float> SpeedChanged;
 
