@@ -15,7 +15,7 @@ public class Enemy : Fighter
         ImmobilityTime = _currentData.ImmobilityTime;
     }
 
-    public override float CalculateTotalAttackSpeed()
+    public override float CalculateTotalAttackDelay()
     {
         return BaseAttackSpeed;
     }

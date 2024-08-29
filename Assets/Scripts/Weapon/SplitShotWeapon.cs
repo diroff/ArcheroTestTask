@@ -9,7 +9,7 @@ public class SplitShotWeapon : RangedWeapon
         SplitShotData = data;
     }
 
-    public override void Attack(IDamagable target)
+    protected override void PerformAttack(IDamagable target)
     {
         if (ProjectilePrefab == null)
             return;

@@ -28,7 +28,7 @@ public abstract class Fighter : Character, IDamagable
         HealthChanged?.Invoke(CurrentHealth, MaxHealth);
 
         BaseDamage = characterData.BaseAttackDamage;
-        BaseAttackSpeed = characterData.BaseAttackSpeed;
+        BaseAttackSpeed = characterData.BaseAttackDelay;
     }
 
     public void SetWeapon(IWeapon weapon)
@@ -84,5 +84,5 @@ public abstract class Fighter : Character, IDamagable
     }
 
     public abstract float CalculateTotalDamage();
-    public abstract float CalculateTotalAttackSpeed();
+    public abstract float CalculateTotalAttackDelay();
 }

@@ -1,11 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class Weapon : IWeapon
 {
-    protected float BaseAttackSpeed;
+    protected float BaseAttackDelay;
     protected float BaseAttackDamage;
 
     protected WeaponData WeaponData;
+
+    private bool _canAttack = true;
 
     public Fighter Owner { get; protected set; }
 
@@ -13,15 +16,36 @@ public abstract class Weapon : IWeapon
     {
         WeaponData = data;
 
-        BaseAttackSpeed = WeaponData.BaseAttackSpeed;
+        BaseAttackDelay = WeaponData.BaseAttackDelay;
         BaseAttackDamage = WeaponData.BaseAttackDamage;
 
         Owner = owner;
 
-        Debug.Log($"Weapon initialized: {Owner}");
+        _canAttack = true;
     }
 
-    public virtual void Attack(IDamagable target) { }
+    public virtual void Attack(IDamagable target)
+    {
+        if (!_canAttack)
+            return;
+
+        PerformAttack(target);
+        Owner.StartCoroutine(AttackCoolDown());
+    }
+
+    private IEnumerator AttackCoolDown()
+    {
+        _canAttack = false;
+        yield return new WaitForSeconds(GetAttackDelay());
+        _canAttack = true;
+    }
+
+    protected virtual float GetAttackDelay()
+    {
+        return BaseAttackDelay + Owner.CalculateTotalAttackDelay();
+    }
+
+    protected virtual void PerformAttack(IDamagable target) { }
 
     public abstract float CalculateDamage();
 }

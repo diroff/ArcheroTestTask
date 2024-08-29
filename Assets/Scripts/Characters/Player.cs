@@ -9,7 +9,7 @@ public class Player : Fighter
         _currentData = data as PlayerData;
     }
 
-    public override float CalculateTotalAttackSpeed()
+    public override float CalculateTotalAttackDelay()
     {
         return BaseAttackSpeed;
     }

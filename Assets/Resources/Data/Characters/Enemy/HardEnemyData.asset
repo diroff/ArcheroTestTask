@@ -15,7 +15,7 @@ MonoBehaviour:
   <FighterID>k__BackingField: 3
   <BaseSpeed>k__BackingField: 5
   <BaseHealth>k__BackingField: 75
-  <BaseAttackSpeed>k__BackingField: 0.25
+  <BaseAttackDelay>k__BackingField: 0.5
   <BaseAttackDamage>k__BackingField: 30
   <MovementRange>k__BackingField: 10
   <ImmobilityTime>k__BackingField: 0.1
