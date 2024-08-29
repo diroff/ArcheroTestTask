@@ -1,6 +1,7 @@
+using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Fighter : Character, IDamagable, IAttacker
+public abstract class Fighter : Character, IDamagable
 {
     protected float MaxHealth;
 
@@ -9,6 +10,7 @@ public abstract class Fighter : Character, IDamagable, IAttacker
     protected float BaseAttackSpeed;
 
     private IDamagable _currentTarget;
+    private IWeapon _currentWeapon;
 
     public UnityAction<float, float> HealthChanged;
     public UnityAction Died;
@@ -27,11 +29,24 @@ public abstract class Fighter : Character, IDamagable, IAttacker
         BaseAttackSpeed = characterData.BaseAttackSpeed;
     }
 
-    public void Attack(IDamagable target)
+    public void SetWeapon(IWeapon weapon)
+    {
+        _currentWeapon = weapon;
+    }
+
+    public void SetTarget(IDamagable target)
     {
         _currentTarget = target;
+    }
 
-        _currentTarget?.TakeDamage(CalculateTotalDamage());
+    public void Attack()
+    {
+        _currentWeapon?.Attack(_currentTarget);
+    }
+
+    public Vector3 GetCurrentDirection()
+    {
+        return transform.forward;
     }
 
     public void TakeDamage(float value)
