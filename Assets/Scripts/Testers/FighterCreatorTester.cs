@@ -37,17 +37,6 @@ public class FighterCreatorTester : MonoBehaviour
         _createdEnemies.Add(enemy);
     }
 
-    private void DestroyLastEnemy()
-    {
-        if (_createdEnemies.Count == 0)
-            return;
-
-        var enemy = _createdEnemies[_createdEnemies.Count - 1];
-
-        _createdEnemies.RemoveAt(_createdEnemies.Count - 1);
-        Destroy(enemy.gameObject);
-    }
-
     public Player GetPlayer()
     {
         return _player;
@@ -67,8 +56,5 @@ public class FighterCreatorTester : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
             CreateEnemy();
-
-        if (Input.GetKeyDown(KeyCode.D))
-            DestroyLastEnemy();
     }
 }
