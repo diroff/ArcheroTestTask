@@ -5,14 +5,14 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] protected Rigidbody Rigidbody;
 
-    protected ProjectileData CurrentData;
-
     protected float CurrentSpeed;
     protected float CurrentDamage;
     protected float CurrentLifeTime;
 
     private float _damageFromWeapon;
     private float _timeSinceLaunch;
+
+    public ProjectileData CurrentData { get; protected set; }
 
     private void OnEnable()
     {

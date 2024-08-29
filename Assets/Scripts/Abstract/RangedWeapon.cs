@@ -1,20 +1,22 @@
+using UnityEngine;
+
 public abstract class RangedWeapon : Weapon
 {
-    protected Projectile Projectile;
+    protected Projectile ProjectilePrefab;
 
     protected RangedWeapon(WeaponData data, Fighter owner) : base(data, owner) { }
 
-    public void SetProjectile(Projectile projectile)
+    public void SetProjectilePrefab(Projectile projectilePrefab)
     {
-        Projectile = projectile;
+        ProjectilePrefab = projectilePrefab;
     }
 
-    public override void Attack(IDamagable target)
+    protected virtual void CreateAndLaunchProjectile(Vector3 direction)
     {
-        if (Projectile == null)
-            return;
+        Projectile projectileInstance = GameObject.Instantiate(ProjectilePrefab, Owner.transform.position, Quaternion.identity);
+        projectileInstance.SetData(ProjectilePrefab.CurrentData, this);
 
-        Projectile.Launch(Owner.GetCurrentDirection());
+        projectileInstance.Launch(direction);
     }
 
     public override float CalculateDamage()

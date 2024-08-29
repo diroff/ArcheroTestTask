@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleShotWeapon : MonoBehaviour
+public abstract class SingleShotWeapon : RangedWeapon
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    protected SingleShotWeapon(WeaponData data, Fighter owner) : base(data, owner) { }
 
-    // Update is called once per frame
-    void Update()
+    public override void Attack(IDamagable target)
     {
-        
+        if (ProjectilePrefab == null)
+            return;
+
+        Vector3 direction = Owner.GetCurrentDirection();
+
+        CreateAndLaunchProjectile(direction);
     }
 }

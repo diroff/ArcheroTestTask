@@ -21,7 +21,8 @@ public class FightTester : MonoBehaviour
         if (!TryToPrepareTargetsToAttack())
             return;
 
-        _enemy.Attack(_player);
+        _enemy.SetTarget(_player);
+        _enemy.Attack();
     }
 
     public void AttackEnemy()
@@ -29,7 +30,8 @@ public class FightTester : MonoBehaviour
         if (!TryToPrepareTargetsToAttack())
             return;
 
-        _player.Attack(_enemy);
+        _enemy.SetTarget(_enemy);
+        _player.Attack();
     }
 
     private bool TryToPrepareTargetsToAttack()
