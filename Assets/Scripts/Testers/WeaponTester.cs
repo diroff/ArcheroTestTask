@@ -51,15 +51,9 @@ public class WeaponTester : MonoBehaviour
 
     public void AttackEnemy()
     {
-        _currentEnemy = _creatorTester.GetRandomEnemy();
-
         if (_player == null)
             return;
 
-        if (_currentEnemy == null)
-            return;
-
-        _player.SetTarget(_currentEnemy);
         _player.Attack();
     }
 }

@@ -11,8 +11,8 @@ public abstract class Fighter : Character, IDamagable
     protected float BaseDamage;
     protected float BaseAttackSpeed;
 
-    private IDamagable _currentTarget;
-    private IWeapon _currentWeapon;
+    protected IDamagable CurrentTarget;
+    protected IWeapon CurrentWeapon;
 
     public UnityAction<float, float> HealthChanged;
     public UnityAction Died;
@@ -33,17 +33,17 @@ public abstract class Fighter : Character, IDamagable
 
     public void SetWeapon(IWeapon weapon)
     {
-        _currentWeapon = weapon;
+        CurrentWeapon = weapon;
     }
 
     public void SetTarget(IDamagable target)
     {
-        _currentTarget = target;
+        CurrentTarget = target;
     }
 
     public void Attack()
     {
-        _currentWeapon?.Attack(_currentTarget);
+        CurrentWeapon?.Attack(CurrentTarget);
     }
 
     public GameObject GetWeaponPlacement()

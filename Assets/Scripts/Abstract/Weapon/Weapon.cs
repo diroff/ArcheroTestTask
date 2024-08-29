@@ -30,12 +30,12 @@ public abstract class Weapon : IWeapon
             return;
 
         PerformAttack(target);
+        _canAttack = false;
         Owner.StartCoroutine(AttackCoolDown());
     }
 
     private IEnumerator AttackCoolDown()
     {
-        _canAttack = false;
         yield return new WaitForSeconds(GetAttackDelay());
         _canAttack = true;
     }

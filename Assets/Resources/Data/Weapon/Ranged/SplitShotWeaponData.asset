@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 310dd629cccac0c4d8e3f1c83e19c2bf, type: 3}
   m_Name: SplitShotWeaponData
   m_EditorClassIdentifier: 
-  <BaseAttackDelay>k__BackingField: 0.5
+  <BaseAttackDelay>k__BackingField: 1
   <BaseAttackDamage>k__BackingField: 3
-  <BulletCount>k__BackingField: 10
+  <BulletCount>k__BackingField: 5
   <Accuracy>k__BackingField: 0.75
