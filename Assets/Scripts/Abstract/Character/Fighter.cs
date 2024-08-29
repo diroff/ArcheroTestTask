@@ -36,9 +36,12 @@ public abstract class Fighter : Character, IDamagable
         RotateToTarget();
     }
 
-    private void RotateToTarget()
+    protected virtual void RotateToTarget()
     {
         if (!TargetIsActive())
+            return;
+
+        if (Movable.IsMoving())
             return;
 
         Vector3 directionToTarget = ((MonoBehaviour)CurrentTarget).transform.position - transform.position;
@@ -63,9 +66,12 @@ public abstract class Fighter : Character, IDamagable
         CurrentTarget = target;
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         if (!TargetIsActive())
+            return;
+
+        if (Movable.IsMoving())
             return;
 
         CurrentWeapon?.Attack(CurrentTarget);

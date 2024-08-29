@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
+  _fighter: {fileID: 6071675891675277384}
   _rigidbody: {fileID: 6935047067983209832}
 --- !u!136 &506063925360335011
 CapsuleCollider:

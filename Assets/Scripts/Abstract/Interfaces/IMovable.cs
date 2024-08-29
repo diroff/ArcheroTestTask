@@ -4,4 +4,5 @@ public interface IMovable
 {
     public void Move(Vector3 position);
     public void Rotate(Vector3 rotation);
+    public bool IsMoving();
 }

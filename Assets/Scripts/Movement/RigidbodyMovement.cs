@@ -33,4 +33,9 @@ public class RigidbodyMovement : Movement
 
         Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, targetRotation, 10 * Time.deltaTime);
     }
+
+    public override bool IsMoving()
+    {
+        return Rigidbody.velocity != Vector3.zero;
+    }
 }

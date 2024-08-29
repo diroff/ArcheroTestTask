@@ -3,10 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class MovementTester : MonoBehaviour
 {
-    [SerializeField] private float _speed;
+    [SerializeField] private Fighter _fighter;
     [SerializeField] private Rigidbody _rigidbody;
-
-    private IMovable _movable;
 
     private float _horizontal;
     private float _vertical;
@@ -18,12 +16,12 @@ public class MovementTester : MonoBehaviour
 
     private void CreateRigidbodyMovement()
     {
-        _movable = new GroundMovement(_rigidbody, _speed);
+        _fighter.SetMovableStrategy(new GroundMovement(_rigidbody, _fighter.CurrentSpeed));
     }
 
     private void Move(Vector3 direction)
     {
-        _movable?.Move(direction);
+        _fighter.Move(direction);
     }
 
     private void Update()

@@ -11,4 +11,5 @@ public abstract class Movement : IMovable
 
     public abstract void Move(Vector3 position);
     public abstract void Rotate(Vector3 rotation);
+    public abstract bool IsMoving();
 }
