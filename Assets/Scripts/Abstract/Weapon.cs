@@ -18,5 +18,5 @@ public abstract class Weapon : IWeapon
 
     public virtual void Attack(IDamagable target) { }
 
-    protected abstract float CalculateDamage();
+    public abstract float CalculateDamage();
 }

@@ -12,7 +12,7 @@ public class SimpleHitWeapon : MeleeWeapon
         target.TakeDamage(CalculateDamage());
     }
 
-    protected override float CalculateDamage()
+    public override float CalculateDamage()
     {
         var damage = Owner.CalculateTotalDamage() + BaseAttackDamage;
 
