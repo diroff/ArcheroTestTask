@@ -3,6 +3,8 @@ using UnityEngine.Events;
 
 public abstract class Fighter : Character, IDamagable
 {
+    [SerializeField] private GameObject _weaponPlacement;
+
     protected float MaxHealth;
 
     protected float CurrentHealth;
@@ -42,6 +44,11 @@ public abstract class Fighter : Character, IDamagable
     public void Attack()
     {
         _currentWeapon?.Attack(_currentTarget);
+    }
+
+    public GameObject GetWeaponPlacement()
+    {
+        return _weaponPlacement;
     }
 
     public Vector3 GetCurrentDirection()

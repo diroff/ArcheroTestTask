@@ -13,7 +13,7 @@ public abstract class RangedWeapon : Weapon
 
     protected virtual void CreateAndLaunchProjectile(Vector3 direction)
     {
-        Projectile projectileInstance = GameObject.Instantiate(ProjectilePrefab, Owner.transform.position, Quaternion.identity);
+        Projectile projectileInstance = GameObject.Instantiate(ProjectilePrefab, Owner.GetWeaponPlacement().transform.position, Quaternion.identity);
         projectileInstance.SetData(ProjectilePrefab.CurrentData, this);
 
         projectileInstance.Launch(direction);

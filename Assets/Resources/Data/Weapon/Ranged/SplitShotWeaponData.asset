@@ -15,4 +15,4 @@ MonoBehaviour:
   <BaseAttackSpeed>k__BackingField: 1
   <BaseAttackDamage>k__BackingField: 3
   <BulletCount>k__BackingField: 5
-  <Accuracy>k__BackingField: 0.5
+  <Accuracy>k__BackingField: 0.75
