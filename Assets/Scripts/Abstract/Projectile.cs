@@ -3,6 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour
 {
+    [field: SerializeField] public ProjectileData CurrentData { get; protected set; }
+
     [SerializeField] protected Rigidbody Rigidbody;
 
     protected float CurrentSpeed;
@@ -12,7 +14,7 @@ public class Projectile : MonoBehaviour
     private float _damageFromWeapon;
     private float _timeSinceLaunch;
 
-    public ProjectileData CurrentData { get; protected set; }
+    private GameObject _owner;
 
     private void OnEnable()
     {
@@ -28,6 +30,8 @@ public class Projectile : MonoBehaviour
         CurrentLifeTime = data.LifeTime;
 
         _damageFromWeapon = weapon.CalculateDamage();
+
+        _owner = weapon.Owner.gameObject;
     }
 
     public void Launch(Vector3 direction)
@@ -43,9 +47,12 @@ public class Projectile : MonoBehaviour
             Deactivate();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        IDamagable damagable = collision.gameObject.GetComponent<IDamagable>();
+        if (other.gameObject == _owner)
+            return;
+
+        IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
 
         if (damagable != null)
             damagable.TakeDamage(CalculateTotalDamage());

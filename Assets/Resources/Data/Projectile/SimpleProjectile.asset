@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SimpleProjectile
   m_EditorClassIdentifier: 
   <BaseDamage>k__BackingField: 5
-  <BaseSpeed>k__BackingField: 3
-  <LifeTime>k__BackingField: 1
+  <BaseSpeed>k__BackingField: 1
+  <LifeTime>k__BackingField: 2

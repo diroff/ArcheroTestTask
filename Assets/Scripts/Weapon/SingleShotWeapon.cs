@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public abstract class SingleShotWeapon : RangedWeapon
+public class SingleShotWeapon : RangedWeapon
 {
-    protected SingleShotWeapon(WeaponData data, Fighter owner) : base(data, owner) { }
+    public SingleShotWeapon(WeaponData data, Fighter owner) : base(data, owner) { }
 
     public override void Attack(IDamagable target)
     {

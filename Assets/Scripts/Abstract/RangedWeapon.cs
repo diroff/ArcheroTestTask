@@ -4,7 +4,7 @@ public abstract class RangedWeapon : Weapon
 {
     protected Projectile ProjectilePrefab;
 
-    protected RangedWeapon(WeaponData data, Fighter owner) : base(data, owner) { }
+    public RangedWeapon(WeaponData data, Fighter owner) : base(data, owner) { }
 
     public void SetProjectilePrefab(Projectile projectilePrefab)
     {

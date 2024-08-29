@@ -4,7 +4,8 @@ public abstract class Weapon : IWeapon
     protected float BaseAttackDamage;
 
     protected WeaponData WeaponData;
-    protected Fighter Owner;
+
+    public Fighter Owner { get; protected set; }
 
     public Weapon(WeaponData data, Fighter owner)
     {
