@@ -205,6 +205,7 @@ Transform:
   - {fileID: 6676505549680833440}
   - {fileID: 8535459236153308750}
   - {fileID: 6823251403824822476}
+  - {fileID: 5226449171215090411}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8291536670940911115
@@ -347,8 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _availableWeapons:
-  - {fileID: 11400000, guid: 0a73fb3e461cded40863ca7f7ea95a84, type: 2}
-  - {fileID: 11400000, guid: 8c12b2ca8b69f864ebdbe3aa48f0b225, type: 2}
+  - {fileID: 11400000, guid: 23b73eb65e3b001488d853694407d295, type: 2}
   _bulletPrefab: {fileID: 9051183261036989108, guid: 1b06fd7c05fad864fb3351580b523485,
     type: 3}
   _bulletData: {fileID: 11400000, guid: e57a2657b1341dd48b6904d42a7a3834, type: 2}
@@ -398,3 +398,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fighter: {fileID: 4323658057354898123}
+--- !u!1 &9061835622564791985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5226449171215090411}
+  - component: {fileID: 7142130328349913709}
+  m_Layer: 3
+  m_Name: DamageSphereComponent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5226449171215090411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9061835622564791985}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1542596310080160030}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7142130328349913709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9061835622564791985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e695b76888896fb4fafc9d96d485869e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fighter: {fileID: 4323658057354898123}
+  _damageRadius: 2.5

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DamagableDetection : MonoBehaviour
+public class DamagableDetectionComponent : MonoBehaviour
 {
     [SerializeField] private Fighter _fighter;
 
