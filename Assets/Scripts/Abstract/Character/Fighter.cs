@@ -31,8 +31,9 @@ public abstract class Fighter : Character, IDamagable
         BaseAttackSpeed = characterData.BaseAttackDelay;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         RotateToTarget();
         Attack();
     }
@@ -42,7 +43,7 @@ public abstract class Fighter : Character, IDamagable
         if (!TargetIsActive())
             return;
 
-        if (Movable.IsMoving())
+        if (IsMoving())
             return;
 
         Vector3 directionToTarget = ((MonoBehaviour)CurrentTarget).transform.position - transform.position;
@@ -70,7 +71,7 @@ public abstract class Fighter : Character, IDamagable
         if (!TargetIsActive())
             return;
 
-        if (Movable.IsMoving())
+        if (IsMoving())
             return;
 
         CurrentWeapon?.Attack(CurrentTarget);
@@ -113,7 +114,7 @@ public abstract class Fighter : Character, IDamagable
         Died?.Invoke();
     }
 
-    protected bool TargetIsActive()
+    public bool TargetIsActive()
     {
         bool targetIsNull = (CurrentTarget == null || ((MonoBehaviour)CurrentTarget) == null);
 
@@ -121,6 +122,14 @@ public abstract class Fighter : Character, IDamagable
             CurrentTarget = null;
 
         return !targetIsNull;
+    }
+
+    public bool IsMoving()
+    {
+        if(Movable == null)
+            return false;
+
+        return Movable.IsMoving();
     }
 
     public abstract float CalculateTotalDamage();

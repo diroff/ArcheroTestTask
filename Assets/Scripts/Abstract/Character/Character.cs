@@ -11,6 +11,10 @@ public abstract class Character : MonoBehaviour
 
     public float CurrentSpeed { get; protected set; }
 
+    protected virtual void Start() { }
+
+    protected virtual void Update() { }
+
     public virtual void SetData(CharacterData data)
     {
         Data = data;
