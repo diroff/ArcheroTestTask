@@ -16,7 +16,6 @@ public class MeleeEnemy : Enemy
             return;
 
         Vector3 direction = ((MonoBehaviour)CurrentTarget).transform.position - transform.position;
-        direction.y = 0;
 
         Move(direction);
     }

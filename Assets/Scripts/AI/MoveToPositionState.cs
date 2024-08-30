@@ -44,6 +44,6 @@ public class MoveToPositionState : IState
     {
         Vector3 randomDirection = Random.insideUnitSphere * _enemy.CalculateMovementRange();
         randomDirection += _enemy.transform.position;
-        return new Vector3(randomDirection.x, _enemy.transform.position.y, randomDirection.z);
+        return new Vector3(randomDirection.x, randomDirection.y, randomDirection.z);
     }
 }

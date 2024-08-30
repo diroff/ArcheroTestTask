@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 5900839843534095403}
   - component: {fileID: 4323658057354898123}
   - component: {fileID: 2359216513787033035}
-  - component: {fileID: 6195616337142766333}
+  - component: {fileID: 807971961329176567}
   - component: {fileID: 5802542118036655654}
   m_Layer: 3
   m_Name: MeleeEnemy
@@ -321,7 +321,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6195616337142766333
+--- !u!114 &807971961329176567
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -330,7 +330,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3945269347099763067}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 366fd73080dfc004985e13f0d7138084, type: 3}
+  m_Script: {fileID: 11500000, guid: 9131ca57ad0e4ad44826fc6026b65dff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _fighter: {fileID: 4323658057354898123}
