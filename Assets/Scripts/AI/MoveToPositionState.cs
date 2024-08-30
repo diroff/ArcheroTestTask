@@ -20,6 +20,12 @@ public class MoveToPositionState : IState
 
     public void UpdateState()
     {
+        if (_enemy.TargetIsActive())
+        {
+            _stateMachine.ChangeState(new AttackState(_enemy, _stateMachine));
+            return;
+        }
+
         Vector3 direction = (_targetPosition - _enemy.transform.position).normalized;
         _enemy.Move(direction);
 

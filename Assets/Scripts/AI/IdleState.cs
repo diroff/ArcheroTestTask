@@ -1,7 +1,11 @@
+using UnityEngine;
+
 public class IdleState : IState
 {
     private readonly Enemy _enemy;
     private readonly StateMachine _stateMachine;
+
+    private float _remainingTime;
 
     public IdleState(Enemy enemy, StateMachine stateMachine)
     {
@@ -11,14 +15,20 @@ public class IdleState : IState
 
     public void EnterState()
     {
-
+        _remainingTime = _enemy.CalculateImmobilityTime();
     }
 
     public void UpdateState()
     {
-        if (_enemy.TargetIsActive() && !_enemy.IsMoving())
+        _remainingTime -= Time.deltaTime;
+
+        if (_enemy.TargetIsActive())
+        {
             _stateMachine.ChangeState(new AttackState(_enemy, _stateMachine));
-        else
+            return;
+        }
+
+        if (_remainingTime <= 0f)
             _stateMachine.ChangeState(new MoveToPositionState(_enemy, _stateMachine));
     }
 

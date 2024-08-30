@@ -44,6 +44,11 @@ public class Enemy : Fighter
         return MovementRange;
     }
 
+    public float CalculateImmobilityTime()
+    {
+        return ImmobilityTime;
+    }
+
     protected override void Die()
     {
         base.Die();
