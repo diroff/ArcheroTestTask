@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EnemiesCount>k__BackingField: 3
   <EnemyPrefabs>k__BackingField:
-  - {fileID: 5694406566066815440, guid: 65d6cc253b0a414479f32af44849a157, type: 3}
   - {fileID: 4323658057354898123, guid: a782a7f506993d146a40723e82702c0a, type: 3}
   <EnemyDatas>k__BackingField:
   - {fileID: 11400000, guid: 56bfcdaca9eecb749b9f2ba9d600dad6, type: 2}
