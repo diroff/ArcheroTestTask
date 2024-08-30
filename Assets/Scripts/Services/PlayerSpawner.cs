@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerSpawner : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField] private LevelGenerator _levelGenerator;
 
     private Player _player;
+
+    public UnityAction<Player> PlayerWasCreated;
 
     private void OnEnable()
     {
@@ -29,5 +32,6 @@ public class PlayerSpawner : MonoBehaviour
         _player = Instantiate(_playerPrefab, spawnPoint, Quaternion.identity);
 
         _player.SetData(_playerData);
+        PlayerWasCreated?.Invoke(_player);
     }
 }

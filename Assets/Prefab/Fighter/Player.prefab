@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 2258620165350795311}
   - component: {fileID: 6935047067983209832}
   - component: {fileID: 6071675891675277384}
-  - component: {fileID: -8847642210900261648}
+  - component: {fileID: 7946676741973995989}
   - component: {fileID: 506063925360335011}
   - component: {fileID: 1085610570325900440}
   m_Layer: 3
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponPlacement: {fileID: 4629780027509633210}
---- !u!114 &-8847642210900261648
+--- !u!114 &7946676741973995989
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,7 +267,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7009458745242182813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2ed8fa1d64ef4340a9998a945dc0398, type: 3}
+  m_Script: {fileID: 11500000, guid: 366fd73080dfc004985e13f0d7138084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _fighter: {fileID: 6071675891675277384}
