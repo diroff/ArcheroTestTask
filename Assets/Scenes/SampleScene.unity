@@ -411,7 +411,7 @@ MonoBehaviour:
     type: 3}
   _wallPrefab: {fileID: 8072416689740752986, guid: d86cc532ac8078447bc0620d0cb9368b,
     type: 3}
-  _doorPrefab: {fileID: 3316299185102518432, guid: c54a21f3d5ff60447b052d20e2cc753c,
+  _doorPrefab: {fileID: 3139938173004966004, guid: c54a21f3d5ff60447b052d20e2cc753c,
     type: 3}
   _obstacleWallPrefab: {fileID: 5972974057496248407, guid: d1d248829e3b7144a8bd33f61458dcdb,
     type: 3}
