@@ -406,17 +406,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac4f98a57c1de24ea12cd9067865330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelWidth: 10
-  _levelHeight: 20
+  _levelSettings: {fileID: 11400000, guid: 73ae6a38600f7b744a3bf9d17c4ca927, type: 2}
   _floorPrefab: {fileID: 6996347989907811113, guid: 9f441d5b65c64414ebe04c203bc26f66,
     type: 3}
   _wallPrefab: {fileID: 8072416689740752986, guid: d86cc532ac8078447bc0620d0cb9368b,
     type: 3}
-  _obstaclePrefab: {fileID: 5972974057496248407, guid: d1d248829e3b7144a8bd33f61458dcdb,
-    type: 3}
   _doorPrefab: {fileID: 3316299185102518432, guid: c54a21f3d5ff60447b052d20e2cc753c,
     type: 3}
-  _numberOfObstacles: 5
+  _obstacleWallPrefab: {fileID: 5972974057496248407, guid: d1d248829e3b7144a8bd33f61458dcdb,
+    type: 3}
+  _obstacleHolePrefab: {fileID: 4725791789100353904, guid: 77d3636862ac15547833cf68d6155dc0,
+    type: 3}
 --- !u!4 &487869506
 Transform:
   m_ObjectHideFlags: 0
