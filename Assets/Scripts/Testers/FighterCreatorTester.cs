@@ -4,10 +4,11 @@ using UnityEngine;
 public class FighterCreatorTester : MonoBehaviour
 {
     [SerializeField] private List<EnemyData> _enemyDatas;
+    [SerializeField] private List<Enemy> _enemyPrefabs;
+
     [SerializeField] private PlayerData _playerData;
 
     [SerializeField] private Player _playerPrefab;
-    [SerializeField] private Enemy _enemyPrefab;
 
     [SerializeField] private Transform _playerSpawnPoint;
     [SerializeField] private Transform _enemySpawnPoint;
@@ -34,7 +35,7 @@ public class FighterCreatorTester : MonoBehaviour
 
         Vector3 spawnDimention = new Vector3(Random.Range(-3f, 3f), 0, Random.Range(-3f, 3f));
 
-        var enemy = Instantiate(_enemyPrefab, _enemySpawnPoint.position + spawnDimention, Quaternion.identity);
+        var enemy = Instantiate(GetRandomEnemy(), _enemySpawnPoint.position + spawnDimention, Quaternion.identity);
         enemy.SetData(_enemyDatas[enemyNumber]);
         _createdEnemies.Add(enemy);
     }
@@ -46,12 +47,12 @@ public class FighterCreatorTester : MonoBehaviour
 
     public Enemy GetRandomEnemy()
     {
-        if (_createdEnemies.Count == 0)
+        if (_enemyPrefabs.Count == 0)
             return null;
 
-        int enemyNumber = Random.Range(0, _createdEnemies.Count);
+        int enemyNumber = Random.Range(0, _enemyPrefabs.Count);
 
-        return _createdEnemies[enemyNumber];
+        return _enemyPrefabs[enemyNumber];
     }
 
     private void Update()

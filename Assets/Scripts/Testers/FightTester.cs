@@ -37,7 +37,6 @@ public class FightTester : MonoBehaviour
     private bool TryToPrepareTargetsToAttack()
     {
         _player = _fighterCreator.GetPlayer();
-        _enemy = _fighterCreator.GetRandomEnemy();
 
         if (_enemy == null || _player == null)
             return false;

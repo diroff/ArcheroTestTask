@@ -47,5 +47,6 @@ public class RigidbodyMovement : Movement
     private void StopMovement()
     {
         Rigidbody.velocity = Vector3.zero;
+        Rigidbody.angularVelocity = Vector3.zero;
     }
 }

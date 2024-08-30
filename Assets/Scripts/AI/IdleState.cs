@@ -4,7 +4,6 @@ public class IdleState : IState
 {
     private readonly Enemy _enemy;
     private readonly StateMachine _stateMachine;
-
     private float _remainingTime;
 
     public IdleState(Enemy enemy, StateMachine stateMachine)
@@ -20,16 +19,18 @@ public class IdleState : IState
 
     public void UpdateState()
     {
-        _remainingTime -= Time.deltaTime;
-
         if (_enemy.TargetIsActive())
         {
             _stateMachine.ChangeState(new AttackState(_enemy, _stateMachine));
             return;
         }
 
+        _remainingTime -= Time.deltaTime;
+
         if (_remainingTime <= 0f)
+        {
             _stateMachine.ChangeState(new MoveToPositionState(_enemy, _stateMachine));
+        }
     }
 
     public void ExitState()

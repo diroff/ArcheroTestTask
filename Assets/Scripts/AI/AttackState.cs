@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class AttackState : IState
 {
     private readonly Enemy _enemy;
@@ -11,19 +13,25 @@ public class AttackState : IState
 
     public void EnterState()
     {
-        _enemy.Attack();
+        _enemy.AttackStrategy();
     }
 
     public void UpdateState()
     {
         if (!_enemy.TargetIsActive())
+        {
             _stateMachine.ChangeState(new IdleState(_enemy, _stateMachine));
-        else if (_enemy.IsMoving())
+            return;
+        }
+
+        if (_enemy.IsMoving())
+        {
             _stateMachine.ChangeState(new MoveToPositionState(_enemy, _stateMachine));
+        }
     }
 
     public void ExitState()
     {
-
+        _enemy.Move(Vector3.zero);
     }
 }
