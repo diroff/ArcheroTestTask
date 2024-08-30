@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1625578329816821256}
   - component: {fileID: 5725491155959780061}
   - component: {fileID: 8955582098413785687}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ObtacleHole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
