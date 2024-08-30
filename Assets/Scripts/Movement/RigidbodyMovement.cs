@@ -9,15 +9,20 @@ public class RigidbodyMovement : Movement
         Rigidbody = rigidbody;
     }
 
-    public override void Move(Vector3 position)
+    public override void Move(Vector3 direction)
     {
-        ApplyMovement(position);
-        Rotate(position);
+        if (direction == Vector3.zero)
+            StopMovement();
+        else
+        {
+            ApplyMovement(direction);
+            Rotate(direction);
+        }
     }
 
-    protected void ApplyMovement(Vector3 position)
+    protected void ApplyMovement(Vector3 direction)
     {
-        Rigidbody.velocity = position * Speed;
+        Rigidbody.velocity = direction.normalized * Speed;
     }
 
     public override void Rotate(Vector3 targetPosition)
@@ -37,5 +42,10 @@ public class RigidbodyMovement : Movement
     public override bool IsMoving()
     {
         return Rigidbody.velocity != Vector3.zero;
+    }
+
+    private void StopMovement()
+    {
+        Rigidbody.velocity = Vector3.zero;
     }
 }
