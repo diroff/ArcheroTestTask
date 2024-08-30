@@ -14,7 +14,6 @@ public class IdleState : IState
 
     public void EnterState()
     {
-        Debug.Log("Idle state");
         _remainingTime = _enemy.CalculateImmobilityTime();
     }
 

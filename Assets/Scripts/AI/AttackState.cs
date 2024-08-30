@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class AttackState : IState
 {
     private readonly Enemy _enemy;
@@ -13,7 +11,6 @@ public class AttackState : IState
 
     public void EnterState()
     {
-        Debug.Log("Attack state");
         _enemy.AttackStrategy();
     }
 
@@ -30,6 +27,6 @@ public class AttackState : IState
 
     public void ExitState()
     {
-        
+
     }
 }

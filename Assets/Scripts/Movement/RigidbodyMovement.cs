@@ -4,6 +4,8 @@ public class RigidbodyMovement : Movement
 {
     protected Rigidbody Rigidbody;
 
+    private float _movementThreshold = 0.05f;
+
     public RigidbodyMovement(Rigidbody rigidbody, float speed) : base(speed)
     {
         Rigidbody = rigidbody;
@@ -32,8 +34,6 @@ public class RigidbodyMovement : Movement
         if (direction == Vector3.zero)
             return; 
 
-        direction.y = 0;
-
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
         Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, targetRotation, 10 * Time.deltaTime);
@@ -41,7 +41,7 @@ public class RigidbodyMovement : Movement
 
     public override bool IsMoving()
     {
-        return Rigidbody.velocity != Vector3.zero;
+        return Rigidbody.velocity.magnitude > _movementThreshold;
     }
 
     private void StopMovement()

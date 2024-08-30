@@ -15,7 +15,6 @@ public class MoveToPositionState : IState
 
     public void EnterState()
     {
-        Debug.Log("Move to position state");
         _targetPosition = FindNewPosition();
     }
 
