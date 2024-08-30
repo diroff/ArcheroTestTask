@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Level0
   m_EditorClassIdentifier: 
   <HorizontalSize>k__BackingField: 5
-  <VerticalSize>k__BackingField: 15
-  <ObstacleWallsCount>k__BackingField: 3
+  <VerticalSize>k__BackingField: 20
+  <ObstacleWallsCount>k__BackingField: 10
   <ObstacleHoleCount>k__BackingField: 5

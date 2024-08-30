@@ -3,40 +3,46 @@ using UnityEngine;
 
 public class FighterCreatorTester : MonoBehaviour
 {
+    [SerializeField] private LevelGenerator _levelGenerator;
+
     [SerializeField] private List<EnemyData> _enemyDatas;
     [SerializeField] private List<Enemy> _enemyPrefabs;
 
     [SerializeField] private PlayerData _playerData;
-
     [SerializeField] private Player _playerPrefab;
-
-    [SerializeField] private Transform _playerSpawnPoint;
-    [SerializeField] private Transform _enemySpawnPoint;
 
     private List<Enemy> _createdEnemies = new List<Enemy>();
 
     private Player _player;
 
-    private void Start()
+    private void OnEnable()
     {
-        CreatePlayer();
+        _levelGenerator.LevelCreated += OnLevelCreated;
     }
 
-    private void CreatePlayer()
+    private void OnDisable()
     {
-        _player = Instantiate(_playerPrefab, _playerSpawnPoint.position, Quaternion.identity);
+        _levelGenerator.LevelCreated -= OnLevelCreated;
+    }
+
+    private void OnLevelCreated()
+    {
+        CreatePlayer(_levelGenerator.GetSpawnPointForPlayer());
+    }
+
+    private void CreatePlayer(Vector3 spawnPoint)
+    {
+        _player = Instantiate(_playerPrefab, spawnPoint, Quaternion.identity);
 
         _player.SetData(_playerData);
     }
 
-    private void CreateEnemy()
+    private void CreateEnemy(Vector3 spawnPoint)
     {
         var enemyNumber = Random.Range(0, _enemyDatas.Count);
-
-        Vector3 spawnDimention = new Vector3(Random.Range(-3f, 3f), 0, Random.Range(-3f, 3f));
-
-        var enemy = Instantiate(GetRandomEnemy(), _enemySpawnPoint.position + spawnDimention, Quaternion.identity);
+        var enemy = Instantiate(GetRandomEnemy(), spawnPoint, Quaternion.identity);
         enemy.SetData(_enemyDatas[enemyNumber]);
+
         _createdEnemies.Add(enemy);
     }
 
@@ -58,6 +64,6 @@ public class FighterCreatorTester : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
-            CreateEnemy();
+            CreateEnemy(_levelGenerator.GetSpawnPointForEnemy());
     }
 }

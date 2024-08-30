@@ -461,6 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b8dbb8123f8bf4e832801ded2ef5b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelGenerator: {fileID: 487869505}
   _enemyDatas:
   - {fileID: 11400000, guid: 56bfcdaca9eecb749b9f2ba9d600dad6, type: 2}
   - {fileID: 11400000, guid: 8019d46fbfde4a543a1ee702671c0701, type: 2}
@@ -471,8 +472,6 @@ MonoBehaviour:
   _playerData: {fileID: 11400000, guid: dc83c01b12bd57a40870f6728217aa6d, type: 2}
   _playerPrefab: {fileID: 6071675891675277384, guid: 04a6180d79bdbb8469bcd91df885bfbc,
     type: 3}
-  _playerSpawnPoint: {fileID: 2971570786517606658}
-  _enemySpawnPoint: {fileID: 1532604629372308157}
 --- !u!4 &573352630
 Transform:
   m_ObjectHideFlags: 0

@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -19,8 +21,11 @@ public class LevelGenerator : MonoBehaviour
     private int _obstacleHoleCount;
 
     private Vector3 _levelCenter;
-
     private float _wallHeight;
+    private List<Vector3> _availableFloorPositions;
+    private HashSet<Vector3> _occupiedPositions;
+
+    public UnityAction LevelCreated;
 
     private void Awake()
     {
@@ -45,11 +50,16 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateLevel()
     {
+        _availableFloorPositions = new List<Vector3>();
+        _occupiedPositions = new HashSet<Vector3>();
+
         CreateFloor();
         CreateWalls();
         CreateWallObstacles();
         CreateHoleObstacles();
         CreateDoor();
+
+        LevelCreated?.Invoke();
     }
 
     private void SetLevelCenter()
@@ -65,6 +75,9 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3 position = new Vector3(x, 0, y) - _levelCenter;
                 Instantiate(_floorPrefab, position, Quaternion.identity, transform);
+
+                if (y >= 2 && y < _levelHeight - 2)
+                    _availableFloorPositions.Add(position);
             }
         }
     }
@@ -86,18 +99,40 @@ public class LevelGenerator : MonoBehaviour
 
     private void CreateWallObstacles()
     {
+        if (_availableFloorPositions.Count == 0) 
+            return;
+
         for (int i = 0; i < _obstacleWallsCount; i++)
         {
-            Vector3 position = new Vector3(Random.Range(0, _levelWidth), _wallHeight / 2f, Random.Range(0, _levelHeight)) - _levelCenter;
-            Instantiate(_obstacleWallPrefab, position, Quaternion.identity, transform);
+            if (_availableFloorPositions.Count == 0) 
+                break;
+
+            int randomIndex = Random.Range(0, _availableFloorPositions.Count);
+            Vector3 position = _availableFloorPositions[randomIndex];
+            _availableFloorPositions.RemoveAt(randomIndex);
+            _occupiedPositions.Add(position);
+
+            Instantiate(_obstacleWallPrefab, position + Vector3.up * (_wallHeight / 2f), Quaternion.identity, transform);
         }
     }
 
     private void CreateHoleObstacles()
     {
+        if (_availableFloorPositions.Count == 0) 
+            return;
+
         for (int i = 0; i < _obstacleHoleCount; i++)
         {
-            Vector3 position = new Vector3(Random.Range(0, _levelWidth), 0, Random.Range(0, _levelHeight)) - _levelCenter;
+            if (_availableFloorPositions.Count == 0) 
+                break;
+
+            int randomIndex = Random.Range(0, _availableFloorPositions.Count);
+            Vector3 position = _availableFloorPositions[randomIndex];
+            position.y += 0.1f;
+
+            _availableFloorPositions.RemoveAt(randomIndex);
+            _occupiedPositions.Add(position);
+
             Instantiate(_obstacleHolePrefab, position, Quaternion.identity, transform);
         }
     }
@@ -106,5 +141,55 @@ public class LevelGenerator : MonoBehaviour
     {
         Vector3 position = new Vector3(_levelWidth / 2f, _wallHeight / 2f, _levelHeight) - _levelCenter;
         Instantiate(_doorPrefab, position, Quaternion.identity, transform);
+        _occupiedPositions.Add(position);
+    }
+
+    public Vector3 GetSpawnPointForPlayer()
+    {
+        Vector3 playerSpawnPosition;
+
+        if (_levelWidth % 2 == 0)
+            playerSpawnPosition = new Vector3((_levelWidth / 2f) - 0.5f, 0, 0) - _levelCenter;
+        else
+            playerSpawnPosition = new Vector3(_levelWidth / 2f, 0, 0) - _levelCenter;
+
+        if (!IsPositionOccupied(playerSpawnPosition))
+            return playerSpawnPosition + Vector3.up;
+
+        foreach (var position in _availableFloorPositions)
+        {
+            if (!IsPositionOccupied(position))
+                return position + Vector3.up;
+        }
+
+        throw new System.Exception("No valid spawn point found for player.");
+    }
+
+    public Vector3 GetSpawnPointForEnemy()
+    {
+        float minY = _levelHeight / 3f;
+
+        List<Vector3> filteredPositions = new List<Vector3>();
+        foreach (var position in _availableFloorPositions)
+        {
+            if (position.z >= minY && !IsPositionOccupied(position))
+            {
+                filteredPositions.Add(position);
+            }
+        }
+
+        if (filteredPositions.Count > 0)
+        {
+            int randomIndex = Random.Range(0, filteredPositions.Count);
+            return filteredPositions[randomIndex] + Vector3.up;
+        }
+
+        throw new System.Exception("No valid spawn point found for enemy.");
+    }
+
+
+    private bool IsPositionOccupied(Vector3 position)
+    {
+        return _occupiedPositions.Contains(position);
     }
 }
