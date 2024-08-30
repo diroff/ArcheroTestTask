@@ -13,25 +13,23 @@ public class AttackState : IState
 
     public void EnterState()
     {
+        Debug.Log("Attack state");
         _enemy.AttackStrategy();
     }
 
     public void UpdateState()
     {
+        _enemy.AttackStrategy();
+
         if (!_enemy.TargetIsActive())
         {
             _stateMachine.ChangeState(new IdleState(_enemy, _stateMachine));
             return;
         }
-
-        if (_enemy.IsMoving())
-        {
-            _stateMachine.ChangeState(new MoveToPositionState(_enemy, _stateMachine));
-        }
     }
 
     public void ExitState()
     {
-        _enemy.Move(Vector3.zero);
+        
     }
 }

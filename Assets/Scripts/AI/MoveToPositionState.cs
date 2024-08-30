@@ -15,6 +15,7 @@ public class MoveToPositionState : IState
 
     public void EnterState()
     {
+        Debug.Log("Move to position state");
         _targetPosition = FindNewPosition();
     }
 
@@ -37,13 +38,12 @@ public class MoveToPositionState : IState
 
     public void ExitState()
     {
-        _enemy.Move(Vector3.zero);
     }
 
     private Vector3 FindNewPosition()
     {
         Vector3 randomDirection = Random.insideUnitSphere * _enemy.CalculateMovementRange();
         randomDirection += _enemy.transform.position;
-        return new Vector3(randomDirection.x, randomDirection.y, randomDirection.z);
+        return new Vector3(randomDirection.x, _enemy.transform.position.y, randomDirection.z);
     }
 }

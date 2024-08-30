@@ -12,9 +12,7 @@ public class MeleeEnemy : Enemy
 
     private void MoveTowardsTarget()
     {
-        if (CurrentTarget == null)
-            return;
-
+        Debug.Log("Move Towards Target");
         Vector3 direction = ((MonoBehaviour)CurrentTarget).transform.position - transform.position;
 
         Move(direction);

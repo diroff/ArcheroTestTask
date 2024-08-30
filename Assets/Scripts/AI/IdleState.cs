@@ -14,6 +14,7 @@ public class IdleState : IState
 
     public void EnterState()
     {
+        Debug.Log("Idle state");
         _remainingTime = _enemy.CalculateImmobilityTime();
     }
 
@@ -28,9 +29,7 @@ public class IdleState : IState
         _remainingTime -= Time.deltaTime;
 
         if (_remainingTime <= 0f)
-        {
             _stateMachine.ChangeState(new MoveToPositionState(_enemy, _stateMachine));
-        }
     }
 
     public void ExitState()
