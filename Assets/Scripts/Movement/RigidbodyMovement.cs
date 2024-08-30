@@ -32,7 +32,9 @@ public class RigidbodyMovement : Movement
         Vector3 direction = targetPosition.normalized;
 
         if (direction == Vector3.zero)
-            return; 
+            return;
+
+        direction.y = 0;
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
