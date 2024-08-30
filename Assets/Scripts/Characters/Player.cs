@@ -18,4 +18,9 @@ public class Player : Fighter
     {
         return BaseDamage;
     }
+
+    public override float ReturnTargetZoneDetection()
+    {
+        return BaseAttackRange;
+    }
 }

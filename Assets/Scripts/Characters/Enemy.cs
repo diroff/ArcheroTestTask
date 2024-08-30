@@ -29,6 +29,12 @@ public class Enemy : Fighter
         ImmobilityTime = _currentData.ImmobilityTime;
     }
 
+    protected override void Die()
+    {
+        base.Die();
+        Destroy(gameObject);
+    }
+
     public virtual void AttackStrategy() { }
 
     public override float CalculateTotalAttackDelay()
@@ -51,9 +57,8 @@ public class Enemy : Fighter
         return ImmobilityTime;
     }
 
-    protected override void Die()
+    public override float ReturnTargetZoneDetection()
     {
-        base.Die();
-        Destroy(gameObject);
+        return BaseAttackRange;
     }
 }

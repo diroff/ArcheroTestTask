@@ -8,8 +8,10 @@ public abstract class Fighter : Character, IDamagable
     protected float MaxHealth;
 
     protected float CurrentHealth;
+
     protected float BaseDamage;
     protected float BaseAttackSpeed;
+    protected float BaseAttackRange;
 
     protected IDamagable CurrentTarget;
     protected IWeapon CurrentWeapon;
@@ -29,6 +31,7 @@ public abstract class Fighter : Character, IDamagable
 
         BaseDamage = characterData.BaseAttackDamage;
         BaseAttackSpeed = characterData.BaseAttackDelay;
+        BaseAttackRange = characterData.BaseAttackRange;
     }
 
     protected override void Update()
@@ -134,4 +137,5 @@ public abstract class Fighter : Character, IDamagable
 
     public abstract float CalculateTotalDamage();
     public abstract float CalculateTotalAttackDelay();
+    public abstract float ReturnTargetZoneDetection();
 }

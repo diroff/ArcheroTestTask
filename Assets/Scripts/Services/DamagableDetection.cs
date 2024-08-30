@@ -1,86 +1,68 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DamagableDetection : MonoBehaviour
 {
     [SerializeField] private Fighter _fighter;
 
-    private List<IDamagable> _damagablesInRange = new List<IDamagable>();
+    private float _detectionRadius;
+    private IDamagable currentTarget;
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        IDamagable damagable = other.GetComponent<IDamagable>();
-
-        if (damagable == null || other.gameObject == _fighter.gameObject)
-            return;
-
-        if (_damagablesInRange.Contains(damagable))
-            return;
-
-        _damagablesInRange.Add(damagable);
-        UpdateTarget();
+        _detectionRadius = _fighter.ReturnTargetZoneDetection();
     }
 
-    private void OnTriggerExit(Collider other)
+    private void Update()
     {
-        IDamagable damagable = other.GetComponent<IDamagable>();
-
-        if (damagable == null)
-            return;
-
-        if (!_damagablesInRange.Contains(damagable))
-            return;
-
-        _damagablesInRange.Remove(damagable);
-        UpdateTarget();
+        DetectTargets();
     }
 
-    private void UpdateTarget()
+    private void DetectTargets()
     {
-        RemoveNullObjectsFromList();
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _detectionRadius);
+        float closestDistanceSqr = Mathf.Infinity;
+        IDamagable closestTarget = null;
 
-        if (_damagablesInRange.Count == 0)
+        Vector3 originPosition = transform.position;
+
+        foreach (var hitCollider in hitColliders)
         {
-            ClearTarget();
-            return;
-        }
+            if (IsIgnoredByCurrentFighter(hitCollider))
+                continue;
 
-        IDamagable closestDamagable = FindClosestDamagable();
-        _fighter.SetTarget(closestDamagable);
-    }
+            IDamagable damagable = hitCollider.GetComponent<IDamagable>();
 
-    private void RemoveNullObjectsFromList()
-    {
-        _damagablesInRange.RemoveAll(damagable => damagable == null || !(damagable is MonoBehaviour));
-    }
+            if (damagable == null)
+                continue;
 
-    private IDamagable FindClosestDamagable()
-    {
-        IDamagable closestDamagable = null;
-        float closestDistance = float.MaxValue;
+            Vector3 targetPosition = hitCollider.transform.position;
+            float distanceSqr = (targetPosition - originPosition).sqrMagnitude;
 
-        foreach (var damagable in _damagablesInRange)
-        {
-            if (damagable is MonoBehaviour monoBehaviour)
+            if (distanceSqr < closestDistanceSqr)
             {
-                if (monoBehaviour == null || monoBehaviour.transform == null)
-                    continue;
-
-                float distance = Vector3.Distance(transform.position, monoBehaviour.transform.position);
-
-                if (distance >= closestDistance)
-                    continue;
-
-                closestDistance = distance;
-                closestDamagable = damagable;
+                closestDistanceSqr = distanceSqr;
+                closestTarget = damagable;
             }
         }
 
-        return closestDamagable;
+        SetTarget(closestTarget);
     }
 
-    private void ClearTarget()
+    private bool IsIgnoredByCurrentFighter(Collider hitCollider)
     {
-        _fighter.SetTarget(null);
+        string currentFighterTag = _fighter.CompareTag("Player") ? "Player" : "Enemy";
+        return hitCollider.CompareTag(currentFighterTag);
+    }
+
+    private void SetTarget(IDamagable target)
+    {
+        if (_fighter == null)
+            return;
+
+        if (target != currentTarget)
+        {
+            currentTarget = target;
+            _fighter.SetTarget(currentTarget);
+        }
     }
 }

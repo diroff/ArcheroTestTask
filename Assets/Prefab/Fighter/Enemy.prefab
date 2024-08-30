@@ -92,7 +92,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4968337817342939236}
-  - component: {fileID: 3184387317781242269}
   - component: {fileID: 798302380167842943}
   m_Layer: 0
   m_Name: DamagableDetection
@@ -116,27 +115,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7968051905001461821}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &3184387317781242269
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 848978861004391850}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 7
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &798302380167842943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +146,7 @@ GameObject:
   - component: {fileID: 323714648216726643}
   m_Layer: 3
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -317,10 +295,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fighter: {fileID: 752041469744376720}
   _rigidbody: {fileID: 7028432055582600461}
-  _patrolRadius: 3
-  _minChangeDirectionInterval: 2
-  _maxChangeDirectionInterval: 5
-  _arrivalThreshold: 0.5
 --- !u!114 &323714648216726643
 MonoBehaviour:
   m_ObjectHideFlags: 0

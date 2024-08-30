@@ -17,3 +17,4 @@ MonoBehaviour:
   <BaseHealth>k__BackingField: 100
   <BaseAttackDelay>k__BackingField: 0.25
   <BaseAttackDamage>k__BackingField: 30
+  <BaseAttackRange>k__BackingField: 10
