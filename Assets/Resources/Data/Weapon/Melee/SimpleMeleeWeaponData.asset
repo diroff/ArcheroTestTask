@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2fb221beb06fa34aabc301ba9f29d3d, type: 3}
   m_Name: SimpleMeleeWeaponData
   m_EditorClassIdentifier: 
-  <BaseAttackSpeed>k__BackingField: 0.25
+  <BaseAttackDelay>k__BackingField: 1
   <BaseAttackDamage>k__BackingField: 5
