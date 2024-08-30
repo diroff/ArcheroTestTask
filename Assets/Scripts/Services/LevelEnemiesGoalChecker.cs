@@ -37,6 +37,8 @@ public class LevelEnemiesGoalChecker : LevelGoalChecker
     {
         _destroyedEnemyCount++;
 
+        Debug.Log($"Destroyed enemies: {_destroyedEnemyCount}/{_levelEnemies.Count}");
+
         if (IsLevelCompleted())
             CompleteLevel();
     }

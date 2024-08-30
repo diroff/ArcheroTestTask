@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class OnLevelEndedDoorOpener : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class OnLevelEndedDoorOpener : MonoBehaviour
     [SerializeField] private LevelGenerator _levelGenerator;
 
     private Door _door;
+
+    public UnityAction<Door> DoorWasSetted;
 
     private void OnEnable()
     {
@@ -22,6 +25,7 @@ public class OnLevelEndedDoorOpener : MonoBehaviour
     private void OnLevelCreated()
     {
         _door = _levelGenerator.GetDoor();
+        DoorWasSetted?.Invoke(_door);
     }
 
     private void OnLevelGoalAchived()

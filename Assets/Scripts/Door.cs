@@ -1,15 +1,18 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Door : MonoBehaviour
 {
     [SerializeField] private Collider _collider;
+
+    public UnityAction WasUsed;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (!collision.gameObject.CompareTag("Player"))
             return;
 
-        Debug.Log("Level over");
+        WasUsed?.Invoke();
     }
 
     private void Start()
@@ -19,6 +22,7 @@ public class Door : MonoBehaviour
 
     public void OpenDoor()
     {
+        Debug.Log("Door is available");
         _collider.enabled = true;
     }
 }
