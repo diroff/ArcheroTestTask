@@ -1,9 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class LevelEnemies : MonoBehaviour
+public class LevelEnemiesSpawner : MonoBehaviour
 {
     [SerializeField] private LevelEnemiesData _enemiesSetting;
     [SerializeField] private LevelGenerator _levelGenerator;
+
+    private List<Enemy> _currentEnemies = new List<Enemy>();
+
+    public UnityAction<List<Enemy>> EnemiesSpawned;
 
     private void OnEnable()
     {
@@ -28,6 +34,8 @@ public class LevelEnemies : MonoBehaviour
         {
             SpawnEnemy();
         }
+
+        EnemiesSpawned?.Invoke(_currentEnemies);
     }
 
     private void SpawnEnemy()
@@ -37,6 +45,8 @@ public class LevelEnemies : MonoBehaviour
 
         var enemy = Instantiate(GetEnemyToSpawn(), spawnPoint, Quaternion.identity);
         enemy.SetData(data);
+
+        _currentEnemies.Add(enemy);
     }
 
     private Enemy GetEnemyToSpawn()

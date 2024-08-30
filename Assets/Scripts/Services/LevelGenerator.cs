@@ -10,7 +10,7 @@ public class LevelGenerator : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject _floorPrefab;
     [SerializeField] private GameObject _wallPrefab;
-    [SerializeField] private GameObject _doorPrefab;
+    [SerializeField] private Door _doorPrefab;
     [SerializeField] private GameObject _obstacleWallPrefab;
     [SerializeField] private GameObject _obstacleHolePrefab;
 
@@ -24,6 +24,8 @@ public class LevelGenerator : MonoBehaviour
     private float _wallHeight;
     private List<Vector3> _availableFloorPositions;
     private HashSet<Vector3> _occupiedPositions;
+
+    private Door _door;
 
     public UnityAction LevelCreated;
 
@@ -140,7 +142,7 @@ public class LevelGenerator : MonoBehaviour
     private void CreateDoor()
     {
         Vector3 position = new Vector3(_levelWidth / 2f, _wallHeight / 2f, _levelHeight) - _levelCenter;
-        Instantiate(_doorPrefab, position, Quaternion.identity, transform);
+        _door = Instantiate(_doorPrefab, position, Quaternion.identity, transform);
         _occupiedPositions.Add(position);
     }
 
@@ -187,6 +189,10 @@ public class LevelGenerator : MonoBehaviour
         throw new System.Exception("No valid spawn point found for enemy.");
     }
 
+    public Door GetDoor()
+    {
+        return _door;
+    }
 
     private bool IsPositionOccupied(Vector3 position)
     {
