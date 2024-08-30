@@ -21,7 +21,10 @@ public class LevelGenerator : MonoBehaviour
     private int _obstacleHoleCount;
 
     private Vector3 _levelCenter;
+
     private float _wallHeight;
+    private float _floorBlockSize;
+
     private List<Vector3> _availableFloorPositions;
     private HashSet<Vector3> _occupiedPositions;
 
@@ -38,6 +41,7 @@ public class LevelGenerator : MonoBehaviour
     {
         SetLevelCenter();
         _wallHeight = _wallPrefab.GetComponent<Renderer>().bounds.size.y;
+        _floorBlockSize = _floorPrefab.GetComponent<Renderer>().bounds.size.x;
         GenerateLevel();
     }
 
@@ -66,7 +70,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void SetLevelCenter()
     {
-        _levelCenter = new Vector3(_levelWidth / 2f, 0, _levelHeight / 2f);
+        _levelCenter = new Vector3(_levelWidth * _floorBlockSize / 2f, 0, _levelHeight * _floorBlockSize / 2f);
     }
 
     private void CreateFloor()
@@ -75,7 +79,7 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int y = 0; y < _levelHeight; y++)
             {
-                Vector3 position = new Vector3(x, 0, y) - _levelCenter;
+                Vector3 position = new Vector3(x * _floorBlockSize, 0, y * _floorBlockSize) - _levelCenter;
                 Instantiate(_floorPrefab, position, Quaternion.identity, transform);
 
                 if (y >= 2 && y < _levelHeight - 2)
@@ -88,25 +92,25 @@ public class LevelGenerator : MonoBehaviour
     {
         for (int x = -1; x <= _levelWidth; x++)
         {
-            Instantiate(_wallPrefab, new Vector3(x, _wallHeight / 2f, -1) - _levelCenter, Quaternion.identity, transform);
-            Instantiate(_wallPrefab, new Vector3(x, _wallHeight / 2f, _levelHeight) - _levelCenter, Quaternion.identity, transform);
+            Instantiate(_wallPrefab, new Vector3(x * _floorBlockSize, _wallHeight / 2f, -1 * _floorBlockSize) - _levelCenter, Quaternion.identity, transform);
+            Instantiate(_wallPrefab, new Vector3(x * _floorBlockSize, _wallHeight / 2f, _levelHeight * _floorBlockSize) - _levelCenter, Quaternion.identity, transform);
         }
 
         for (int y = 0; y < _levelHeight; y++)
         {
-            Instantiate(_wallPrefab, new Vector3(-1, _wallHeight / 2f, y) - _levelCenter, Quaternion.identity, transform);
-            Instantiate(_wallPrefab, new Vector3(_levelWidth, _wallHeight / 2f, y) - _levelCenter, Quaternion.identity, transform);
+            Instantiate(_wallPrefab, new Vector3(-1 * _floorBlockSize, _wallHeight / 2f, y * _floorBlockSize) - _levelCenter, Quaternion.identity, transform);
+            Instantiate(_wallPrefab, new Vector3(_levelWidth * _floorBlockSize, _wallHeight / 2f, y * _floorBlockSize) - _levelCenter, Quaternion.identity, transform);
         }
     }
 
     private void CreateWallObstacles()
     {
-        if (_availableFloorPositions.Count == 0) 
+        if (_availableFloorPositions.Count == 0)
             return;
 
         for (int i = 0; i < _obstacleWallsCount; i++)
         {
-            if (_availableFloorPositions.Count == 0) 
+            if (_availableFloorPositions.Count == 0)
                 break;
 
             int randomIndex = Random.Range(0, _availableFloorPositions.Count);
@@ -120,12 +124,12 @@ public class LevelGenerator : MonoBehaviour
 
     private void CreateHoleObstacles()
     {
-        if (_availableFloorPositions.Count == 0) 
+        if (_availableFloorPositions.Count == 0)
             return;
 
         for (int i = 0; i < _obstacleHoleCount; i++)
         {
-            if (_availableFloorPositions.Count == 0) 
+            if (_availableFloorPositions.Count == 0)
                 break;
 
             int randomIndex = Random.Range(0, _availableFloorPositions.Count);
@@ -141,7 +145,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void CreateDoor()
     {
-        Vector3 position = new Vector3(_levelWidth / 2f, _wallHeight / 2f, _levelHeight) - _levelCenter;
+        Vector3 position = new Vector3(_levelWidth * _floorBlockSize / 2f, _wallHeight / 2f, _levelHeight * _floorBlockSize) - _levelCenter;
         _door = Instantiate(_doorPrefab, position, Quaternion.identity, transform);
         _occupiedPositions.Add(position);
     }
@@ -151,9 +155,9 @@ public class LevelGenerator : MonoBehaviour
         Vector3 playerSpawnPosition;
 
         if (_levelWidth % 2 == 0)
-            playerSpawnPosition = new Vector3((_levelWidth / 2f) - 0.5f, 0, 0) - _levelCenter;
+            playerSpawnPosition = new Vector3((_levelWidth * _floorBlockSize / 2f) - _floorBlockSize / 2f, 0, 0) - _levelCenter;
         else
-            playerSpawnPosition = new Vector3(_levelWidth / 2f, 0, 0) - _levelCenter;
+            playerSpawnPosition = new Vector3(_levelWidth * _floorBlockSize / 2f, 0, 0) - _levelCenter;
 
         if (!IsPositionOccupied(playerSpawnPosition))
             return playerSpawnPosition + Vector3.up;
@@ -169,7 +173,7 @@ public class LevelGenerator : MonoBehaviour
 
     public Vector3 GetSpawnPointForEnemy()
     {
-        float minY = _levelHeight / 3f;
+        float minY = _levelHeight * _floorBlockSize / 3f;
 
         List<Vector3> filteredPositions = new List<Vector3>();
         foreach (var position in _availableFloorPositions)
@@ -197,5 +201,15 @@ public class LevelGenerator : MonoBehaviour
     private bool IsPositionOccupied(Vector3 position)
     {
         return _occupiedPositions.Contains(position);
+    }
+
+    public float GetLevelWidth()
+    {
+        return _levelWidth * _floorBlockSize;
+    }
+
+    public float GetLevelHeight()
+    {
+        return _levelHeight * _floorBlockSize;
     }
 }
