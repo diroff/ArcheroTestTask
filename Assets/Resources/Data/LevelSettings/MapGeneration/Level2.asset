@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcf600009901ea642a5703be39b68d0d, type: 3}
-  m_Name: Level0
+  m_Name: Level2
   m_EditorClassIdentifier: 
-  <HorizontalSize>k__BackingField: 10
-  <VerticalSize>k__BackingField: 25
-  <ObstacleWallsCount>k__BackingField: 3
-  <ObstacleHoleCount>k__BackingField: 3
+  <HorizontalSize>k__BackingField: 15
+  <VerticalSize>k__BackingField: 35
+  <ObstacleWallsCount>k__BackingField: 10
+  <ObstacleHoleCount>k__BackingField: 10

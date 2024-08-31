@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 724ef43d6e3f33e44a971a27dacddc8c, type: 3}
-  m_Name: Level0
+  m_Name: Level1
   m_EditorClassIdentifier: 
-  <EnemiesCount>k__BackingField: 3
+  <EnemiesCount>k__BackingField: 6
   <EnemyPrefabs>k__BackingField:
   - {fileID: 5694406566066815440, guid: 65d6cc253b0a414479f32af44849a157, type: 3}
+  - {fileID: 4323658057354898123, guid: a782a7f506993d146a40723e82702c0a, type: 3}
   <EnemyDatas>k__BackingField:
+  - {fileID: 11400000, guid: 55ea2c672764d3645b5a08f7219e1222, type: 2}
+  - {fileID: 11400000, guid: 55ea2c672764d3645b5a08f7219e1222, type: 2}
   - {fileID: 11400000, guid: 56bfcdaca9eecb749b9f2ba9d600dad6, type: 2}
+  - {fileID: 11400000, guid: 55ea2c672764d3645b5a08f7219e1222, type: 2}

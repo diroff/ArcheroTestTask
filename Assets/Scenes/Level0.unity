@@ -318,7 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 330585545}
   _levelGenerator: {fileID: 487869505}
-  _fovOffSet: 25
+  _fovOffSet: 20
 --- !u!1 &404779325
 GameObject:
   m_ObjectHideFlags: 0

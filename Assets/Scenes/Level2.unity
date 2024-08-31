@@ -318,7 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 330585545}
   _levelGenerator: {fileID: 487869505}
-  _fovOffSet: 10
+  _fovOffSet: 15
 --- !u!1 &404779325
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac4f98a57c1de24ea12cd9067865330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSettings: {fileID: 11400000, guid: 51fb7bce0e9177948b39be0675e1bafa, type: 2}
+  _levelSettings: {fileID: 11400000, guid: 15c37538476e72f47baf89d2b30bdab3, type: 2}
   _floorPrefab: {fileID: 6996347989907811113, guid: 9f441d5b65c64414ebe04c203bc26f66,
     type: 3}
   _wallPrefab: {fileID: 8072416689740752986, guid: d86cc532ac8078447bc0620d0cb9368b,
@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67498421862a51b4c8f27a61922888ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemiesSetting: {fileID: 11400000, guid: 70d31c76248e3824280dfcec799e35ce, type: 2}
+  _enemiesSetting: {fileID: 11400000, guid: 901077edfac911e4c800e9a8c9b1d9f0, type: 2}
   _levelGenerator: {fileID: 487869505}
 --- !u!4 &936996380
 Transform:
@@ -911,7 +911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d22730ba76b82419f69d11f3757203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: Level2
+  _sceneName: Level0
 --- !u!4 &1631810261
 Transform:
   m_ObjectHideFlags: 0
