@@ -104,6 +104,7 @@ public abstract class Fighter : Character, IDamagable
         }
 
         HealthChanged?.Invoke(CurrentHealth, MaxHealth);
+        Debug.Log($"{gameObject} health: {CurrentHealth}/{MaxHealth}");
     }
 
     private void SetHealth(float value)

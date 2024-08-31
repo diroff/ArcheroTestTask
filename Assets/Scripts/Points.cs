@@ -15,5 +15,6 @@ public class Points : MonoBehaviour
         _currentPoints += count;
 
         PointsCountChanged?.Invoke(_currentPoints);
+        Debug.Log($"Current points: {_currentPoints}");
     }
 }
